@@ -1,21 +1,49 @@
-MIT License
+# Todo List Website
 
-Copyright (c) 2024 Ali Norouzi
+A simple and clean web app for building and managing your daily schedule. Add, organize, and track your tasks with ease — all your data stays right in your browser.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Features
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+- Add new tasks to your to-do list
+- Mark tasks as complete
+- Edit or delete existing tasks
+- Data persistence using **localStorage** (your tasks are saved even after refreshing or closing the browser)
+- Clean and responsive user interface
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## How It Works
+
+This project uses the browser's `localStorage` API to store your tasks locally on your device. This means:
+
+- No backend or database required
+- Your data stays private on your own device
+- Tasks remain saved between sessions
+
+## Getting Started
+
+1. Clone the repository
+   ```bash
+   [git clone https://github.com/your-username/your-repo-name.git](https://github.com/AliNorouzi2/Todo-list.git)
+   ```
+2. Open `index.html` in your browser
+3. Start adding your tasks!
+
+## Technologies Used
+
+- HTML
+- CSS
+- JavaScript (localStorage API)
+
+## Usage
+
+- Type your task in the input field and click **Add** (or press Enter)
+- Click on a task to mark it as done
+- Use the delete button to remove a task
+- All changes are automatically saved to localStorage
+
+## Contributing
+
+Feel free to fork this repository and submit pull requests for any improvements or new features.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
