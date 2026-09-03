@@ -5,9 +5,13 @@ const clearButton = $.getElementById('clearButton')
 const todoListElem = $.getElementById('todoList')
 
 let todosArray = []
-
 function addNewTodo() {
-    let newTodoTitle = inputElem.value
+    let newTodoTitle = inputElem.value.trim()
+
+    if (newTodoTitle === '') {
+        inputElem.focus()
+        return
+    }
 
     let newTodoObj = {
         id: todosArray.length + 1,
@@ -22,7 +26,7 @@ function addNewTodo() {
     todosGenerator(todosArray)
 
     inputElem.focus()
-}
+} 
 
 function setLocalStorage(todosList) {
     localStorage.setItem('todos', JSON.stringify(todosList))
