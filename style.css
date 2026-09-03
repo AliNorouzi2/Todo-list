@@ -1,16 +1,524 @@
-#todoList label{
-  width: 80%;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-main: #0b0f19;
+    --bg-secondary: #111827;
+    --card: rgba(17, 24, 39, 0.72);
+
+    --text-main: #f8fafc;
+    --text-secondary: #94a3b8;
+
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+
+    --success: #22c55e;
+    --danger: #ef4444;
+
+    --border: rgba(255, 255, 255, 0.08);
+
+    --shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    --radius: 18px;
 }
-#todoList li{
-  list-style-type: none;
+
+
+/* ================================
+   Global
+   ================================ */
+
+* {
+    box-sizing: border-box;
 }
-.completed{
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: 'Inter', sans-serif;
+
+    color: var(--text-main);
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(99, 102, 241, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(34, 197, 94, 0.10),
+            transparent 30%
+        ),
+        var(--bg-main);
+
+    overflow-x: hidden;
+}
+
+
+/* ================================
+   Main Container
+   ================================ */
+
+.container {
+    width: min(700px, 92%);
+    margin: 70px auto;
+
+    padding: 40px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+    border-radius: 28px;
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    animation: containerEnter 0.7s ease;
+}
+
+
+/* ================================
+   Title
+   ================================ */
+
+.container h2 {
+    margin-bottom: 35px;
+
+    font-size: 38px;
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+    background: linear-gradient(
+        135deg,
+        #8d9cea,
+        #000f92
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* ================================
+   Form
+   ================================ */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* ================================
+   Input
+   ================================ */
+
+#itemInput {
+    width: 100%;
+    height: 54px;
+
+    padding: 0 18px;
+
+    color: var(--text-main);
+    background: rgba(145, 145, 145, 0.118);
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+#itemInput::placeholder {
+    color: #64748b;
+}
+
+#itemInput:focus {
+    background: rgba(255, 255, 255, 0.07);
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.12),
+        0 0 25px rgba(99, 102, 241, 0.12);
+}
+
+
+/* ================================
+   Buttons
+   ================================ */
+
+#addButton,
+#clearButton {
+    height: 48px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+/* Add Button */
+
+#addButton {
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    box-shadow:
+        0 8px 25px rgba(99, 102, 241, 0.25);
+}
+
+#addButton:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(99, 102, 241, 0.4);
+}
+
+#addButton:active {
+    transform: translateY(0);
+}
+
+
+/* Clear Button */
+
+#clearButton {
+    margin-left: 8px;
+
+    background: rgba(239, 68, 68, 0.12);
+
+    color: #f87171;
+
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+#clearButton:hover {
+    transform: translateY(-2px);
+
+    background: rgba(239, 68, 68, 0.2);
+
+    box-shadow:
+        0 8px 25px rgba(239, 68, 68, 0.15);
+}
+
+#clearButton:active {
+    transform: translateY(0);
+}
+
+
+/* ================================
+   Todo Section
+   ================================ */
+
+.container h3 {
+    margin-top: 42px;
+    margin-bottom: 18px;
+
+    padding-bottom: 12px;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* ================================
+   Todo List
+   ================================ */
+
+#todoList {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+/* ================================
+   Todo Item
+   ================================ */
+
+#todoList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 66px;
+
+    margin-bottom: 12px;
+    padding: 10px 12px 10px 18px;
+
+    border-radius: var(--radius);
+
+    border: 1px solid var(--border);
+
+    background: rgba(255, 255, 255, 0.045);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        opacity 0.25s ease;
+
+    animation: todoEnter 0.35s ease;
+}
+
+
+/* Hover */
+
+#todoList li:hover {
+    transform: translateY(-4px);
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border-color: rgba(129, 140, 248, 0.25);
+}
+
+
+/* ================================
+   Todo Text
+   ================================ */
+
+#todoList li label {
+    flex: 1;
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    word-break: break-word;
+
+    transition:
+        color 0.25s ease,
+        text-decoration 0.25s ease,
+        opacity 0.25s ease;
+}
+
+
+/* ================================
+   Completed Todo
+   ================================ */
+
+#todoList li.uncompleted {
+    opacity: 0.65;
+
+    background: rgba(0, 255, 94, 0.148);
+    border-color: rgba(2, 255, 95, 0.297);
 
 }
-.uncompleted label{
-  color: #afa7a7;
-  text-decoration: line-through;
+
+#todoList li.uncompleted label {
+    color: #717171;
+
+    text-decoration: line-through;
 }
-#todoList .btn{
-  margin-left: 10px;
+
+
+/* ================================
+   Todo Buttons
+   ================================ */
+
+#todoList li button {
+    min-width: 85px;
+    height: 40px;
+
+    padding: 0 12px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Complete */
+
+#todoList li .btn-success {
+    background: rgba(34, 197, 94, 0.12);
+
+    color: #4ade80;
+
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+#todoList li .btn-success:hover {
+    transform: translateY(-1px);
+
+    background: rgba(34, 197, 94, 0.2);
+
+    box-shadow:
+        0 6px 18px rgba(34, 197, 94, 0.12);
+}
+
+
+/* Delete */
+
+#todoList li .btn-danger {
+    background: rgba(239, 68, 68, 0.10);
+
+    color: #f87171;
+
+    border: 1px solid rgba(239, 68, 68, 0.18);
+}
+
+#todoList li .btn-danger:hover {
+    transform: translateY(-1px);
+
+    background: rgba(239, 68, 68, 0.2);
+
+    box-shadow:
+        0 6px 18px rgba(239, 68, 68, 0.12);
+}
+
+
+/* ================================
+   Bootstrap Override
+   ================================ */
+
+.btn:focus,
+.btn:active,
+.form-control:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
+
+/* ================================
+   Empty List
+   ================================ */
+
+#todoList:empty::before {
+    content: 'Your todo list is empty';
+
+    display: block;
+
+    padding: 30px 10px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* ================================
+   Responsive
+   ================================ */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 94%;
+
+        margin: 25px auto;
+
+        padding: 25px 18px;
+
+        border-radius: 22px;
+    }
+
+    .container h2 {
+        font-size: 30px;
+
+        margin-bottom: 28px;
+    }
+
+    #addButton,
+    #clearButton {
+        width: 100%;
+
+        margin: 0 0 10px 0;
+    }
+
+    #todoList li {
+        flex-wrap: wrap;
+
+        padding: 14px;
+    }
+
+    #todoList li label {
+        width: 100%;
+
+        flex-basis: 100%;
+
+        margin-bottom: 5px;
+    }
+
+    #todoList li button {
+        flex: 1;
+    }
+
+    .container h3 {
+        margin-top: 30px;
+    }
+}
+
+
+/* ================================
+   Selection
+   ================================ */
+
+::selection {
+    background: rgba(99, 102, 241, 0.35);
+
+    color: white;
 }
